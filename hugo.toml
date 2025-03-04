@@ -3,6 +3,9 @@ languageCode = 'en-us'
 title = 'ShonkBlog'
 theme = 'nightfall'
 
+[taxonomies]
+authors = "authors"
+
 [menu]
 [[menu.header]]
 name = "posts"
