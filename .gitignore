@@ -1,0 +1,23 @@
+# Hugo-generated public directory (you usually don't commit this)
+public/
+
+# Hugo cache and temporary files
+resources/
+hugo_stats.json
+
+# Local development cache
+.cache/
+.DS_Store
+*.log
+
+# Node modules (if using npm/yarn for theme management)
+node_modules/
+
+# VS Code workspace settings (if using VS Code)
+.vscode/
+
+# Deployment artifacts (if applicable)
+.deploy/
+
+.idea
+.hugo_build.lock

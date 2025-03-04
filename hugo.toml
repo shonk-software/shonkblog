@@ -1,0 +1,35 @@
+baseURL = 'https://shonk-software.github.io/ShonkBlog/'
+languageCode = 'en-us'
+title = 'ShonkBlog'
+theme = 'nightfall'
+
+[menu]
+[[menu.header]]
+name = "posts"
+weight = 0
+url = "/posts"
+
+[params]
+user = "blog"
+hostname = "shonk.software"
+
+[params.styles]
+color = "#FF006E"
+
+[params.author]
+name = "ShonkBlog"
+avatar = "/squarehaj_pixelart.png"
+avatarSize = "size-l"
+email = "blog@shonk.software"
+
+[[params.social]]
+key = 0
+name = "github"
+url = "https://github.com/shonk-software"
+target = "_blank" # Defines your target option in a-href. _blank for a new Tab for example.
+aria = "GitHub Profile" # Define the aria label for accessibility like page reader - this is better for your SEO
+
+[[params.social]]
+key = 1
+name = "homepage"
+url = "https://shonk.software"

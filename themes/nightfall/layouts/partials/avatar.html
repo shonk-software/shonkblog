@@ -1,0 +1,10 @@
+{{ if .Site.Params.author.avatar }}
+    <div class="authorImageWrapper">
+        <img
+            src='{{ absURL "squarehaj_pixelart.png" }}'
+            alt="{{ .Site.Params.author.name }}"
+            class="{{ .Site.Params.author.avatarSize | default "size-m" }}"
+            style='image-rendering: crisp-edges'
+        />
+    </div>
+{{ end }}
