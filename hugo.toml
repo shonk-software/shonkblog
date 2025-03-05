@@ -1,4 +1,4 @@
-baseURL = 'https://shonk-software.github.io/ShonkBlog/'
+baseURL = 'https://blog.shonk.software/'
 languageCode = 'en-us'
 title = 'ShonkBlog'
 theme = 'nightfall'
