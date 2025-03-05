@@ -16,6 +16,9 @@ node_modules/
 # VS Code workspace settings (if using VS Code)
 .vscode/
 
+# Fleet workspace settings
+.fleet
+
 # Deployment artifacts (if applicable)
 .deploy/
 
