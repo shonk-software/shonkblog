@@ -13,6 +13,8 @@ Coolest blog in the world: [is the shonks blog](https://blog.shonk.software)
 
 Adding more lines is cool
 
+<!--more-->
+
 _cursive even_
 
 **or bold?**
