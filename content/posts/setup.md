@@ -1,6 +1,6 @@
 +++
 date = '2025-03-04T13:03:00+01:00'
-draft = false
+draft = true
 title = 'Setup'
 authors = ["Say"]
 +++
