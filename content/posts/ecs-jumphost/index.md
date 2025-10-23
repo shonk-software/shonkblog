@@ -2,6 +2,7 @@
 date = '2025-10-23T13:38:18+02:00'
 draft = false
 title = 'ECS Jumphost'
+description = "Create a secure ECS-based jumphost using ecs exec and SSM port forwarding to access services (like Postgres) inside a private VPC."
 [params]
 authors = ["flam"]
 +++
