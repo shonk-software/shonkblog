@@ -20,12 +20,12 @@ I've encountered the following problem; I wanted to connect to a postgres databa
 A few options came to mind;
 - Make the database publicly accessible
 - Heard from another team that they use a Codebuild job with SSH port forwarding
-- -> Run SSH port forwarding through an EC2 instance instead
+- Run SSH port forwarding through an EC2 instance instead
 - Search for a different solution
 
 ## The Problems
 
-Lets go through the options; Making the database / service publically accessible is a _suboptimal_ solution and often times not feasable, so that ones out.
+Lets go through the options; Making the database / service publically accessible is a _suboptimal_ solution and often times not feasable, so that one's out.
 
 [Using a Codebuild Debug job](https://docs.aws.amazon.com/codebuild/latest/userguide/sandbox-ssh-tutorial.html) and SSH-ing through that?
 Works... but feels hacky and has other downsides, like cost and max. runtime of 1 hour...
@@ -33,11 +33,12 @@ Works... but feels hacky and has other downsides, like cost and max. runtime of 
 Next, SSH port forwarding through an EC2 instance might come to mind. 
 Simply allow the instance to connect to your database / service and then use it as jumphost / forwarding proxy.
 This feels much nicer, right?
-Problem I had, in my project I wasn't able to use EC2 for other reasons.
+Problem is, in my project I wasn't able to use EC2 for other reasons.
 
 ## The Solution
 The solution I ended up with is pretty neat imo.
-I've found the option of using the aws CLI's [ecs exec](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html) for getting a shell session running inside an ECS Task.
+I've found the option of using the aws CLI's [ecs execute-command](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec-run.html) for getting a shell session running inside an ECS Task.
+Note that installing the [(official) aws cli session manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html) is required.
 With `ecs exec` you can run any command, so something like `/bin/bash` works too; the command looks something like this:
 ```bash
 aws ecs execute-command \
@@ -46,33 +47,32 @@ aws ecs execute-command \
     --cluster $CLUSTER_NAME \
     --task $TASK_ID \
     --container $CONTAINER_NAME \
-    --interactive --command "/bin/sh"
+    --interactive --command "/bin/bash"
 ```
 
 With the corresponding Dockerfile (including some utilities):
 ```Dockerfile
 FROM --platform=linux/arm64 public.ecr.aws/amazonlinux/amazonlinux:latest
 
-RUN yum install -y \
+RUN dnf install -y \
     unzip \
     jq \
     postgresql17 \
     zstd \
     zip \
     zsh \
-    && yum clean all
+    && dnf clean all \
+    && rm -rf /var/cache/dnf
 
 CMD ["sleep", "infinity"]
 ```
 
-_Note: I'm not gonna talk about actually creating the ECS Task, in short though; I pushed the image to ECR and created a cluster for the task. I also configured the tasks security group to allow it to connect to the postgres DB through the VPC._
+_Note: I'm not gonna talk about actually creating the ECS Task in detail. In short though; I pushed the image to ECR and created a cluster for the task. I also configured the tasks security group to allow it to connect to the postgres DB through the VPC._
+
 
 After creating a docker image I was able to run the command to get a shell running inside the ECS task:
 
 ```
-The Session Manager plugin was installed successfully. Use the AWS CLI to start a session.
-
-
 Starting session with SessionId: ecs-execute-command-vvs9i5lb3l2rv5nnu5dg2rtk44
 bash-5.2# psql -h the-postgres-db.random_chars.region.rds.amazonaws.com -U db_superuser
 Password for user db_superuser:
