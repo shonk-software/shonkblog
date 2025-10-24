@@ -114,4 +114,4 @@ Now that we have a basic MVP running, it's time to extend the feature set. But b
 Self-hosted action runners are a top priority, and apart from that,
 I've collected about 20 small tickets that need solving to guarantee a maintainable and clean codebase—which I definitely need to keep my sanity.
 
-After that, we will probably hack away at implementing actual routing! 
+After that, we will probably hack away at implementing actual routing!
