@@ -10,9 +10,15 @@
             }
         }, 100)
     </script>
+
+    {{ 
+        $script := resources.Get "js/count.js" 
+        | minify
+        | fingerprint "sha256"
+    }}
     <script data-goatcounter="https://counter.shonk.software/count"
-            async src="//gc.zgo.at/count.js"></script>
-    <title>{{ block "title" . }}
+            async src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" ></script>
+    <title>{{ block "title" . }} 
         {{ .Site.Title }}
         {{ end }}</title>
 
