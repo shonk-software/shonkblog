@@ -5,6 +5,7 @@ theme = 'nightfall'
 
 [taxonomies]
 authors = "authors"
+tag = "tags"
 
 [menu]
 [[menu.header]]
