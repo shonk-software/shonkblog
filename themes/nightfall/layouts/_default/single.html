@@ -36,4 +36,18 @@
         {{ .Content }}
     </div>
 </div>
+
+<!-- Add the list of tags to the bottom of the page -->
+{{ if .Params.tags }}
+  <div class="tags">
+    <strong>Tags:</strong>
+    [<!-- Tags opening bracket -->
+    {{- range $index, $tag := .Params.tags -}}
+      {{- if gt $index 0 }}, {{ end -}}
+      <a href="{{ "/tags/" | relLangURL }}{{ $tag | urlize }}">{{ $tag }}</a>
+    {{- end -}}
+    ]<!-- Tags closing bracket -->
+  </div>
+{{ end }}
+
 {{ end }}
